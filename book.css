@@ -1,0 +1,93 @@
+@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+
+html { font-size: 10.5pt; }
+body {
+  font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1f2328; line-height: 1.5; max-width: none; margin: 0; padding: 0;
+}
+header#title-block-header { display: none; }
+
+h1 { font-size: 24pt; color: #0b3d91; border-bottom: 3px solid #0b3d91;
+     padding-bottom: 6px; margin-top: 0; page-break-after: avoid; }
+h2 { font-size: 15pt; color: #0b3d91; margin-top: 22px; border-bottom: 1px solid #d0d7de;
+     padding-bottom: 3px; page-break-after: avoid; }
+h3 { font-size: 12pt; color: #24292f; margin-top: 16px; page-break-after: avoid; }
+h4 { font-size: 11pt; margin-top: 12px; page-break-after: avoid; }
+
+p, li { orphans: 3; widows: 3; }
+blockquote { border-left: 4px solid #0b3d91; background: #f0f4fb; margin: 10px 0;
+             padding: 8px 14px; color: #333; }
+blockquote p { margin: 0; }
+
+code { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9pt;
+       background: #f6f8fa; padding: 1px 4px; border-radius: 3px; }
+pre { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px;
+      padding: 10px 12px; overflow-x: hidden; white-space: pre-wrap;
+      word-wrap: break-word; font-size: 8.6pt; line-height: 1.35;
+      page-break-inside: avoid; }
+pre code { background: none; padding: 0; font-size: inherit; }
+div.sourceCode { margin: 10px 0; }
+
+table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 9.5pt;
+        page-break-inside: auto; }
+th, td { border: 1px solid #d0d7de; padding: 5px 8px; vertical-align: top; text-align: left; }
+th { background: #eaeef2; font-weight: 600; }
+tr { page-break-inside: avoid; }
+tbody tr:nth-child(even) { background: #fafbfc; }
+
+a { color: #0969da; text-decoration: none; }
+
+.page-break { page-break-before: always; }
+
+.cover { text-align: center; padding-top: 160px; page-break-after: always; }
+.cover h1 { border: none; font-size: 36pt; }
+.cover h2 { border: none; color: #57606a; font-weight: normal; font-size: 16pt; }
+.cover ol { display: inline-block; text-align: left; margin-top: 30px; }
+.cover p { color: #57606a; }
+
+.toc-page { page-break-after: always; }
+.toc-page table td:last-child { width: 80px; }
+
+ul, ol { padding-left: 24px; }
+hr { border: none; border-top: 1px solid #d0d7de; margin: 18px 0; }
+
+/* Mermaid diagrams */
+pre.mermaid { background: #fff; border: 1px solid #d0d7de; border-radius: 6px;
+              padding: 10px; text-align: center; page-break-inside: avoid;
+              white-space: normal; }
+pre.mermaid svg { max-width: 100%; height: auto; max-height: 230mm; }
+
+/* ---- Web edition motion (body.anim). PDF build never sets this class. ---- */
+.anim-bar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between;
+  align-items: center; padding: 8px 16px; background: #0f172a; color: #e2e8f0;
+  font: 14px -apple-system, Helvetica, Arial, sans-serif; }
+.anim-bar button { background: #2563eb; color: #fff; border: 0; border-radius: 6px;
+  padding: 6px 12px; cursor: pointer; font-size: 13px; }
+body.web .page-break { border-top: 1px solid #e2e8f0; margin: 48px 0; }
+@keyframes sd-flow { to { stroke-dashoffset: -28; } }
+/* Never animate Mermaid nodes (g.node) at all. Chrome composites an animated SVG
+   element and then ignores its transform attribute, so every icon piles up at
+   0,0 and the tier boxes render empty. Only the arrows move. */
+body.anim pre.mermaid path.flowchart-link,
+body.anim pre.mermaid line.messageLine0,
+body.anim pre.mermaid line.messageLine1 {
+  stroke-dasharray: 10 7 !important; animation: sd-flow 1.2s linear infinite; }
+@media (prefers-reduced-motion: reduce), print {
+  body.anim pre.mermaid * { animation: none !important; } }
+
+/* ---- Readability: bigger labels, bolder arrows, clear tier titles ---- */
+pre.mermaid path.flowchart-link { stroke-width: 2.4px !important; }
+pre.mermaid marker path { fill: #1e293b !important; stroke: #1e293b !important; }
+pre.mermaid .nodeLabel, pre.mermaid .label text, pre.mermaid g.label text,
+pre.mermaid .icon-shape text { font-size: 15px !important; font-weight: 600 !important;
+  fill: #0f172a !important; }
+pre.mermaid .edgeLabel, pre.mermaid .edgeLabel text, pre.mermaid .edgeLabel .label {
+  font-size: 14px !important; font-weight: 600 !important; fill: #1e3a8a !important;
+  color: #1e3a8a !important; }
+pre.mermaid .edgeLabel rect, pre.mermaid .edgeLabel .label-container {
+  fill: #ffffff !important; stroke: #cbd5e1 !important; rx: 4px; }
+pre.mermaid .cluster-label text, pre.mermaid .cluster-label .nodeLabel,
+pre.mermaid .cluster text { font-size: 17px !important; font-weight: 800 !important;
+  letter-spacing: 0.02em; text-transform: uppercase; fill: #334155 !important; }
+pre.mermaid .cluster rect { rx: 10px; ry: 10px; stroke-width: 2px !important; }
+pre.mermaid g.node rect, pre.mermaid g.node path.basic { stroke-width: 1.5px; }
